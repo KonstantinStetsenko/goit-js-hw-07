@@ -40,33 +40,34 @@
 // Після натискання на кнопку Destroy усі квадрати з div#boxes мають видалятися
 
 const inputNum = document.querySelector(`input[type="number"]`);
-console.log(inputNum);
+
 const createButton = document.querySelector(`button[data-create]`);
-console.log(createButton);
+
 const destroyButton = document.querySelector(`button[data-destroy]`);
-console.log(destroyButton);
+
 const boxList = document.querySelector("#boxes");
 
 createButton.addEventListener("click", creatEl);
 
 function creatEl() {
+  boxList.innerHTML = "";
   const inputValue = inputNum.value;
-  console.log(inputValue);
+
   if (inputValue < 1 || inputValue > 100) {
     return;
   }
   let divElementSize = 30;
-  let divElement;
+
+  let divElements = [];
   for (let i = 0; i < inputValue; i++) {
-    divElement = document.createElement("div");
+    let divElement = document.createElement("div");
     divElement.style.width = `${divElementSize}px`;
     divElement.style.height = `${divElementSize}px`;
     divElement.style.backgroundColor = getRandomHexColor();
     divElementSize += 10;
-    boxList.append(divElement);
+    divElements.push(divElement);
   }
-
-  inputNum.value = "";
+  boxList.append(...divElements);
 }
 
 destroyButton.addEventListener("click", () => {
